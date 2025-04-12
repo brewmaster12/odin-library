@@ -21,4 +21,19 @@ addBookToLibrary("Suttree", "McCarthy", "350", "not read");
 addBookToLibrary("Bible", "God", "1000", "read");
 addBookToLibrary("The Hobbit", "Tolkien", "200", "not read");
 
-console.log(myLibrary);
+
+const table = document.querySelector("table");
+
+function displayBooks() {
+    myLibrary.map((book) => {
+        const bookRow = document.createElement("tr");
+        for (property in book) {
+            let entry = document.createElement("td");
+            entry.textContent = `${book[property]}`;
+            bookRow.appendChild(entry);
+        }
+        table.appendChild(bookRow);
+    })
+}
+
+displayBooks();
