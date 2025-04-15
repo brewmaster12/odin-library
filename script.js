@@ -37,3 +37,34 @@ function displayBooks() {
 }
 
 displayBooks();
+
+
+
+const dialog = document.querySelector("dialog");
+
+document.getElementById("newBookButton").addEventListener("click", () => {
+    dialog.showModal();
+})
+
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const read = document.querySelector("#read");
+
+function displayNewBook() {
+    const bookRow = document.createElement("tr");
+    const book = myLibrary.at(-1);
+        for (property in book) {
+            let entry = document.createElement("td");
+            entry.textContent = `${book[property]}`;
+            bookRow.appendChild(entry);
+        }
+        table.appendChild(bookRow);
+}
+
+document.getElementById("submit").addEventListener("click", (event) => {
+    event.preventDefault();
+    addBookToLibrary(title.value, author.value, pages.value, read.value);
+    displayNewBook();
+    dialog.close();
+})
