@@ -9,6 +9,13 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.id = crypto.randomUUID();
+    this.changeReadStatus = function() {
+        if (this.read === "read") {
+            this.read = "not read"
+        } else if (this.read === "not read") {
+            this.read = "read"
+        }
+    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -31,13 +38,20 @@ function displayBooks() {
     myLibrary.map((book) => {
         const bookRow = document.createElement("tr");
         for (property in book) {
-            let entry = document.createElement("td");
-            entry.textContent = `${book[property]}`;
-            bookRow.appendChild(entry);
+            let cell = document.createElement("td");
+            cell.textContent = `${book[property]}`;
+            bookRow.appendChild(cell);
         }
+        // Change read status button
+        const changeReadBtn = document.createElement("button");
+        changeReadBtn.textContent = "Change read status";
+        changeReadBtn.addEventListener("click", () => {
+            book.changeReadStatus();
+            displayBooks();
+        })
+        bookRow.appendChild(changeReadBtn);
         // Remove book functionality
         const removeBookBtn = document.createElement("button");
-        removeBookBtn.dataset.id = book.id;
         removeBookBtn.textContent = "Remove book";
         removeBookBtn.addEventListener("click", () => {
             removeThisBook(book.id);
@@ -85,4 +99,6 @@ document.getElementById("submit").addEventListener("click", (event) => {
     displayBooks();
     dialog.close();
 })
+
+// Change "read" status functionality
 
