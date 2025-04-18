@@ -38,9 +38,11 @@ function displayBooks() {
     myLibrary.map((book) => {
         const bookRow = document.createElement("tr");
         for (property in book) {
+            if (typeof book[property] != "function") {
             let cell = document.createElement("td");
             cell.textContent = `${book[property]}`;
             bookRow.appendChild(cell);
+            }
         }
         // Change read status button
         const changeReadBtn = document.createElement("button");
