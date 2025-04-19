@@ -9,14 +9,15 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.id = crypto.randomUUID();
-    this.changeReadStatus = function() {
-        if (this.read === "read") {
-            this.read = "not read"
-        } else if (this.read === "not read") {
-            this.read = "read"
-        }
-    }
 }
+
+Book.prototype.changeReadStatus = function() {
+    if (this.read === "read") {
+        this.read = "not read"
+    } else if (this.read === "not read") {
+        this.read = "read"
+    }
+};
 
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
